@@ -1,8 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -15,7 +16,7 @@ type Person struct {
 }
 
 	
-type Todo struct {
+type Todo []struct {
 	UserID    int    `json:"userId"`
 	ID        int    `json:"id"`
 	Title     string `json:"title"`
@@ -37,11 +38,22 @@ func getData() {
         os.Exit(1)
     }
 
-    responseData, err := ioutil.ReadAll(res.Body)
+		defer res.Body.Close()
+
+    responseData, err := io.ReadAll(res.Body)
+
     if err != nil {
         log.Fatal(err)
     }
-    fmt.Println(string(responseData))
+    // fmt.Println(string(responseData))
+
+		todos := Todo{}
+
+		_ = json.Unmarshal(responseData, &todos)
+
+		fmt.Println(todos[1].Title)
+
+
 	
 }
 
