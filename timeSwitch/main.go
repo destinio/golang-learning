@@ -11,6 +11,8 @@ func isDay() {
 
 	fmt.Println(time.Tuesday)
 
+	defer fmt.Println("done")
+
 	switch time.Friday {
 	case day + 0:
 		fmt.Println("Today.")
