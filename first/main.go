@@ -53,6 +53,10 @@ func getData() {
 
 		fmt.Println(todos[1].Title)
 
+		for i := 0; i < len(todos); i++ {
+			fmt.Println(todos[i].Title)
+		}
+
 
 	
 }
